@@ -8,6 +8,7 @@ class RunescapeItem:
         self.equipment_slot = equipment_slot
         self.name = name
 
+
 class ItemWeapon(RunescapeItem):
     """Define a weapon."""
 
@@ -33,6 +34,7 @@ class ItemWeapon(RunescapeItem):
 
         super().__init__(equipment_slot, name)
 
+
 class ItemOffHand(RunescapeItem):
     """Define an item worn in the offhand slot."""
 
@@ -56,6 +58,7 @@ class ItemOffHand(RunescapeItem):
         self.prayer_bonus = prayer_bonus
 
         super().__init__(equipment_slot, name)
+
 
 class ItemHelmet(RunescapeItem):
     """Define an item worn in the helmet slot."""
@@ -81,6 +84,7 @@ class ItemHelmet(RunescapeItem):
 
         super().__init__(equipment_slot, name)
 
+
 class ItemChest(RunescapeItem):
     """Define an item worn in the chest slot."""
 
@@ -104,6 +108,7 @@ class ItemChest(RunescapeItem):
         self.prayer_bonus = prayer_bonus
 
         super().__init__(equipment_slot, name)
+
 
 class ItemLegs(RunescapeItem):
     """Define an item worn in the legs slot."""
@@ -129,6 +134,7 @@ class ItemLegs(RunescapeItem):
 
         super().__init__(equipment_slot, name)
 
+
 class ItemBoots(RunescapeItem):
     """Define an item worn in the boot slot."""
 
@@ -152,6 +158,7 @@ class ItemBoots(RunescapeItem):
         self.prayer_bonus = prayer_bonus
 
         super().__init__(equipment_slot, name)
+
 
 class ItemNecklace(RunescapeItem):
     """Define an item worn in the necklace slot."""
@@ -177,6 +184,7 @@ class ItemNecklace(RunescapeItem):
 
         super().__init__(equipment_slot, name)
 
+
 class ItemCape(RunescapeItem):
     """Define an item worn in the cape slot."""
 
@@ -200,6 +208,7 @@ class ItemCape(RunescapeItem):
         self.prayer_bonus = prayer_bonus
 
         super().__init__(equipment_slot, name)
+
 
 class ItemPocket(RunescapeItem):
     """Define an item worn in the pocket slot."""
@@ -225,6 +234,7 @@ class ItemPocket(RunescapeItem):
 
         super().__init__(equipment_slot, name)
 
+
 class ItemGloves(RunescapeItem):
     """Define an item worn in the glove slot."""
 
@@ -249,6 +259,7 @@ class ItemGloves(RunescapeItem):
 
         super().__init__(equipment_slot, name)
 
+
 class ItemRing(RunescapeItem):
     """Define an item worn in the ring slot."""
 
@@ -272,4 +283,3 @@ class ItemRing(RunescapeItem):
         self.prayer_bonus = prayer_bonus
 
         super().__init__(equipment_slot, name)
-

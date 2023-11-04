@@ -4,6 +4,8 @@ import json
 
 
 def get_wiki_stats(i):
+    """Opens a webpage on the Oldschool Runescape wikipedia and pull information about items and stores said
+    information in 2 separate json files to be parsed later."""
     url = "https://oldschool.runescape.wiki/w/" + i + "#Charged"
     response = get(url)
     html_soup = BeautifulSoup(response.text, "html.parser")
@@ -25,7 +27,6 @@ def get_wiki_stats(i):
         except:
             continue
 
-
     raw_mage_str = list(stat_containers[12].text)
     mage_str = 0
 
@@ -43,17 +44,17 @@ def get_wiki_stats(i):
         mage_str = raw_mage_str[0]
 
     item_dictionary = {"name": str(stat_containers2[0].text),
-                        "equipment slot": str(stat_containers3[14].a.get("title")),
-                        "special attack": special_attack, "stab bonus": int(stat_containers[0].text),
-                        "slash bonus": int(stat_containers[1].text), "crush bonus": int(stat_containers[2].text),
-                        "mage bonus": int(stat_containers[3].text), "range bonus": int(stat_containers[4].text),
-                        "stab defense": int(stat_containers[5].text), "slash defense": int(stat_containers[6].text),
-                        "crush defense": int(stat_containers[7].text), "mage defense": int(stat_containers[8].text),
-                        "range defense": int(stat_containers[9].text), "melee strength": int(stat_containers[10].text),
-                        "range strength": int(stat_containers[11].text), "mage strength": int(mage_str),
-                        "prayer": int(stat_containers[13].text)}
+                       "equipment slot": str(stat_containers3[14].a.get("title")),
+                       "special attack": special_attack, "stab bonus": int(stat_containers[0].text),
+                       "slash bonus": int(stat_containers[1].text), "crush bonus": int(stat_containers[2].text),
+                       "mage bonus": int(stat_containers[3].text), "range bonus": int(stat_containers[4].text),
+                       "stab defense": int(stat_containers[5].text), "slash defense": int(stat_containers[6].text),
+                       "crush defense": int(stat_containers[7].text), "mage defense": int(stat_containers[8].text),
+                       "range defense": int(stat_containers[9].text), "melee strength": int(stat_containers[10].text),
+                       "range strength": int(stat_containers[11].text), "mage strength": int(mage_str),
+                       "prayer": int(stat_containers[13].text)}
 
-# fixing a change the wiki made, labeling the equipment slots differently
+    # fixing a change the wiki made, labeling the equipment slots differently
     if item_dictionary["equipment slot"] == "2h slot table":
         item_dictionary["equipment slot"] = "2h slot"
     if item_dictionary["equipment slot"] == "Weapon slot table":
@@ -79,7 +80,7 @@ def get_wiki_stats(i):
     if item_dictionary["equipment slot"] == "Feet slot table":
         item_dictionary["equipment slot"] = "Feet slot"
 
-# check through the stored_items.json file to see if an item has already been added or not. if not it is added
+    # check through the stored_items.json file to see if an item has already been added or not. if not it is added
     with open("stored_items.json", "r") as checkfile:
         for line in checkfile:
             added_items = json.loads(line)
@@ -98,11 +99,5 @@ def get_wiki_stats(i):
         elif not add_item:
             print("ITEM NOT ADDED")
 
-
 # change the string to import a new item
-get_wiki_stats("magus ring")
-
-
-
-
-
+# get_wiki_stats("magus ring")

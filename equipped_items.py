@@ -1,6 +1,7 @@
 import runescape_items as rsi
 import import_from_wiki as ifw
 from tkinter import *
+import tkinter as tk
 
 rsi.build_item_lists()
 
@@ -24,41 +25,57 @@ offhand_name_list = []
 item_list_list = [rsi.helmet_list, rsi.top_list, rsi.bottom_list, rsi.pocket_list, rsi.glove_list, rsi.boot_list,
                   rsi.ring_list, rsi.neck_list, rsi.cape_list, rsi.weapon_list, rsi.offhand_list]
 
-# adding every item from each equipment slot list, to the searchable list and name list
-for x in rsi.helmet_list:
-    all_item_list.append(x)
-    helmet_name_list.append(x.name)
-for x in rsi.top_list:
-    all_item_list.append(x)
-    top_name_list.append(x.name)
-for x in rsi.bottom_list:
-    all_item_list.append(x)
-    bottom_name_list.append(x.name)
-for x in rsi.pocket_list:
-    all_item_list.append(x)
-    pocket_name_list.append(x.name)
-for x in rsi.glove_list:
-    all_item_list.append(x)
-    gloves_name_list.append(x.name)
-for x in rsi.boot_list:
-    all_item_list.append(x)
-    boots_name_list.append(x.name)
-for x in rsi.ring_list:
-    all_item_list.append(x)
-    ring_name_list.append(x.name)
-for x in rsi.neck_list:
-    all_item_list.append(x)
-    amulet_name_list.append(x.name)
-for x in rsi.cape_list:
-    all_item_list.append(x)
-    cape_name_list.append(x.name)
-for x in rsi.weapon_list:
-    all_item_list.append(x)
-    weapon_name_list.append(x.name)
-for x in rsi.offhand_list:
-    all_item_list.append(x)
-    offhand_name_list.append(x.name)
 
+def build_item_lists():
+    """Build both of the lists used for the option menus."""
+    all_item_list.clear()
+    helmet_name_list.clear()
+    top_name_list.clear()
+    bottom_name_list.clear()
+    pocket_name_list.clear()
+    gloves_name_list.clear()
+    boots_name_list.clear()
+    ring_name_list.clear()
+    amulet_name_list.clear()
+    cape_name_list.clear()
+    weapon_name_list.clear()
+    offhand_name_list.clear()
+    for x in rsi.helmet_list:
+        all_item_list.append(x)
+        helmet_name_list.append(x.name)
+    for x in rsi.top_list:
+        all_item_list.append(x)
+        top_name_list.append(x.name)
+    for x in rsi.bottom_list:
+        all_item_list.append(x)
+        bottom_name_list.append(x.name)
+    for x in rsi.pocket_list:
+        all_item_list.append(x)
+        pocket_name_list.append(x.name)
+    for x in rsi.glove_list:
+        all_item_list.append(x)
+        gloves_name_list.append(x.name)
+    for x in rsi.boot_list:
+        all_item_list.append(x)
+        boots_name_list.append(x.name)
+    for x in rsi.ring_list:
+        all_item_list.append(x)
+        ring_name_list.append(x.name)
+    for x in rsi.neck_list:
+        all_item_list.append(x)
+        amulet_name_list.append(x.name)
+    for x in rsi.cape_list:
+        all_item_list.append(x)
+        cape_name_list.append(x.name)
+    for x in rsi.weapon_list:
+        all_item_list.append(x)
+        weapon_name_list.append(x.name)
+    for x in rsi.offhand_list:
+        all_item_list.append(x)
+        offhand_name_list.append(x.name)
+
+
+build_item_lists()
 # create a window, named win
 win = Tk()
 
@@ -92,6 +109,10 @@ frame5 = Frame(win)
 frame5.config(bg="brown")
 frame5.pack(side="left")
 
+frame7 = Frame(win)
+frame7.config(bg="green")
+frame7.pack(side="right")
+
 
 # empty list to add items to later
 equipped_items = []
@@ -116,6 +137,25 @@ ranged_str_label = Label(frame4, bg="brown")
 mage_str_label = Label(frame4, bg="brown")
 prayer_label = Label(frame4, bg="brown")
 spec_label = Label(frame6, bg="brown")
+
+
+def button_input():
+    """Basically reset everything when a new item is added."""
+    input_char = input_entry.get()
+    ifw.get_wiki_stats(input_char)
+    rsi.build_item_lists()
+    build_item_lists()
+    optionmenu_reset()
+    equipped_items.clear()
+    make_option_menus()
+    set_stats()
+    set_labels()
+
+
+# input widgets
+input_label = Label(frame7, bg="green", text="New Item:")
+input_entry = Entry(frame7, bg="green")
+input_button = Button(frame7, bg="green", text="Import", command=button_input)
 
 
 def set_labels():
@@ -188,10 +228,6 @@ def callback(a):
                             equipped_items.remove(w)
                 if z.equipment_slot == "Weapon slot":
                     for w in equipped_items:
-                        # if w.equipment_slot == "2h slot":
-                        #     equipped_items.remove(w)
-                        # if w.equipment_slot == "2h slot table":
-                        #     equipped_items.remove(w)
                         if "2h slot" in w.equipment_slot:
                             equipped_items.remove(w)
                 if z.equipment_slot == "Shield slot":
@@ -206,63 +242,106 @@ def callback(a):
                 set_labels()
 
 
-# create the OptionMenu for each equipment slot and set the default selection
+# defining the option menus
 selected_helmet_option = StringVar()
-selected_helmet_option.set(helmet_name_list[0])
-equipped_items.append(rsi.helmet_list[0])
 helmet_option_list = OptionMenu(frame1, selected_helmet_option, *helmet_name_list, command=callback)
-helmet_option_list.pack()
 selected_top_option = StringVar()
-selected_top_option.set(top_name_list[0])
-equipped_items.append(rsi.top_list[0])
 top_option_list = OptionMenu(frame1, selected_top_option, *top_name_list, command=callback)
-top_option_list.pack()
-selected_bottom_option = StringVar()
-selected_bottom_option.set(bottom_name_list[0])
-equipped_items.append(rsi.bottom_list[0])
-bottom_option_list = OptionMenu(frame1, selected_bottom_option, *bottom_name_list, command=callback)
-bottom_option_list.pack()
-selected_pocket_option = StringVar()
-selected_pocket_option.set(pocket_name_list[0])
-equipped_items.append(rsi.pocket_list[0])
-pocket_option_list = OptionMenu(frame1, selected_pocket_option, *pocket_name_list, command=callback)
-pocket_option_list.pack()
-selected_gloves_option = StringVar()
-selected_gloves_option.set(gloves_name_list[0])
-equipped_items.append(rsi.glove_list[0])
-gloves_option_list = OptionMenu(frame1, selected_gloves_option, *gloves_name_list, command=callback)
-gloves_option_list.pack()
-selected_boots_option = StringVar()
-selected_boots_option.set(boots_name_list[0])
-equipped_items.append(rsi.boot_list[0])
-boots_option_list = OptionMenu(frame1, selected_boots_option, *boots_name_list, command=callback)
-boots_option_list.pack()
-selected_ring_option = StringVar()
-selected_ring_option.set(ring_name_list[0])
-equipped_items.append(rsi.ring_list[0])
-ring_option_list = OptionMenu(frame1, selected_ring_option, *ring_name_list, command=callback)
-ring_option_list.pack()
-selected_amulet_option = StringVar()
-selected_amulet_option.set(amulet_name_list[0])
-equipped_items.append(rsi.neck_list[0])
-amulet_option_list = OptionMenu(frame1, selected_amulet_option, *amulet_name_list, command=callback)
-amulet_option_list.pack()
-selected_cape_option = StringVar()
-selected_cape_option.set(cape_name_list[0])
-equipped_items.append(rsi.cape_list[0])
-cape_option_list = OptionMenu(frame1, selected_cape_option, *cape_name_list, command=callback)
-cape_option_list.pack()
-selected_weapon_option = StringVar()
-selected_weapon_option.set(weapon_name_list[0])
-equipped_items.append(rsi.weapon_list[0])
-weapon_option_list = OptionMenu(frame1, selected_weapon_option, *weapon_name_list, command=callback)
-weapon_option_list.pack()
 selected_offhand_option = StringVar()
-selected_offhand_option.set(offhand_name_list[0])
-equipped_items.append(rsi.offhand_list[0])
 offhand_option_list = OptionMenu(frame1, selected_offhand_option, *offhand_name_list, command=callback)
-offhand_option_list.pack()
+selected_weapon_option = StringVar()
+weapon_option_list = OptionMenu(frame1, selected_weapon_option, *weapon_name_list, command=callback)
+selected_cape_option = StringVar()
+cape_option_list = OptionMenu(frame1, selected_cape_option, *cape_name_list, command=callback)
+selected_amulet_option = StringVar()
+amulet_option_list = OptionMenu(frame1, selected_amulet_option, *amulet_name_list, command=callback)
+selected_ring_option = StringVar()
+ring_option_list = OptionMenu(frame1, selected_ring_option, *ring_name_list, command=callback)
+selected_boots_option = StringVar()
+boots_option_list = OptionMenu(frame1, selected_boots_option, *boots_name_list, command=callback)
+selected_gloves_option = StringVar()
+gloves_option_list = OptionMenu(frame1, selected_gloves_option, *gloves_name_list, command=callback)
+selected_pocket_option = StringVar()
+pocket_option_list = OptionMenu(frame1, selected_pocket_option, *pocket_name_list, command=callback)
+selected_bottom_option = StringVar()
+bottom_option_list = OptionMenu(frame1, selected_bottom_option, *bottom_name_list, command=callback)
 
+
+def make_option_menus():
+    """Creating an Optionmenu for each equipment slot and setting the default selection."""
+    selected_helmet_option.set(helmet_name_list[0])
+    equipped_items.append(rsi.helmet_list[0])
+    helmet_option_list.pack()
+    selected_top_option.set(top_name_list[0])
+    equipped_items.append(rsi.top_list[0])
+    top_option_list.pack()
+    selected_bottom_option.set(bottom_name_list[0])
+    equipped_items.append(rsi.bottom_list[0])
+    bottom_option_list.pack()
+    selected_pocket_option.set(pocket_name_list[0])
+    equipped_items.append(rsi.pocket_list[0])
+    pocket_option_list.pack()
+    selected_gloves_option.set(gloves_name_list[0])
+    equipped_items.append(rsi.glove_list[0])
+    gloves_option_list.pack()
+    selected_boots_option.set(boots_name_list[0])
+    equipped_items.append(rsi.boot_list[0])
+    boots_option_list.pack()
+    selected_ring_option.set(ring_name_list[0])
+    equipped_items.append(rsi.ring_list[0])
+    ring_option_list.pack()
+    selected_amulet_option.set(amulet_name_list[0])
+    equipped_items.append(rsi.neck_list[0])
+    amulet_option_list.pack()
+    selected_cape_option.set(cape_name_list[0])
+    equipped_items.append(rsi.cape_list[0])
+    cape_option_list.pack()
+    selected_weapon_option.set(weapon_name_list[0])
+    equipped_items.append(rsi.weapon_list[0])
+    weapon_option_list.pack()
+    selected_offhand_option.set(offhand_name_list[0])
+    equipped_items.append(rsi.offhand_list[0])
+    offhand_option_list.pack()
+
+
+def optionmenu_reset():
+    """When a new item is added, removes and readds everything to the Optionmenus."""
+    helmet_option_list["menu"].delete(0, "end")
+    for i in helmet_name_list:
+        helmet_option_list["menu"].add_command(label=i, command=tk._setit(selected_helmet_option, i, callback))
+    top_option_list["menu"].delete(0, "end")
+    for i in top_name_list:
+        top_option_list["menu"].add_command(label=i, command=tk._setit(selected_top_option, i, callback))
+    bottom_option_list["menu"].delete(0, "end")
+    for i in bottom_name_list:
+        bottom_option_list["menu"].add_command(label=i, command=tk._setit(selected_bottom_option, i, callback))
+    pocket_option_list["menu"].delete(0, "end")
+    for i in pocket_name_list:
+        pocket_option_list["menu"].add_command(label=i, command=tk._setit(selected_pocket_option, i, callback))
+    gloves_option_list["menu"].delete(0, "end")
+    for i in gloves_name_list:
+        gloves_option_list["menu"].add_command(label=i, command=tk._setit(selected_gloves_option, i, callback))
+    boots_option_list["menu"].delete(0, "end")
+    for i in boots_name_list:
+        boots_option_list["menu"].add_command(label=i, command=tk._setit(selected_boots_option, i, callback))
+    ring_option_list["menu"].delete(0, "end")
+    for i in ring_name_list:
+        ring_option_list["menu"].add_command(label=i, command=tk._setit(selected_ring_option, i, callback))
+    amulet_option_list["menu"].delete(0, "end")
+    for i in amulet_name_list:
+        amulet_option_list["menu"].add_command(label=i, command=tk._setit(selected_amulet_option, i, callback))
+    cape_option_list["menu"].delete(0, "end")
+    for i in cape_name_list:
+        cape_option_list["menu"].add_command(label=i, command=tk._setit(selected_cape_option, i, callback))
+    weapon_option_list["menu"].delete(0, "end")
+    for i in weapon_name_list:
+        weapon_option_list["menu"].add_command(label=i, comman=tk._setit(selected_weapon_option, i, callback))
+    offhand_option_list["menu"].delete(0, "end")
+    for i in offhand_name_list:
+        offhand_option_list["menu"].add_command(label=i, command=tk._setit(selected_offhand_option, i, callback))
+
+
+make_option_menus()
 # lists for labels, stored by which frame they are meant for
 frame2_label_list = []
 
@@ -285,7 +364,7 @@ frame2_label_list.append(slash_def_bonus_label)
 frame2_label_list.append(crush_def_bonus_label)
 frame2_label_list.append(mage_def_bonus_label)
 frame2_label_list.append(ranged_def_bonus_label)
-other_bonuses_label = Label(frame4, bg="red", text="Other Bonuses")
+other_bonuses_label = Label(frame4, bg="red", text="     Other Bonuses     ")
 frame2_label_list.append(other_bonuses_label)
 frame2_label_list.append(melee_str_label)
 frame2_label_list.append(ranged_str_label)
@@ -306,6 +385,9 @@ empty_label4 = Label(frame6, bg="brown", text=" ")
 frame2_label_list.append(empty_label4)
 empty_label5 = Label(frame6, bg="brown", text=" ")
 frame2_label_list.append(empty_label5)
+frame2_label_list.append(input_label)
+frame2_label_list.append(input_entry)
+frame2_label_list.append(input_button)
 
 
 # pack all of the labels in the label list
@@ -337,4 +419,3 @@ for x in frame2_label_list:
 
 # start the loop of the gui to open the window until you x out
 win.mainloop()
-

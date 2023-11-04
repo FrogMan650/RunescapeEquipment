@@ -14,23 +14,34 @@ pocket_list = []
 offhand_list = []
 weapon_list = []
 
-# Empty items for placeholders
-helmet_list.append(rs.ItemHelmet("Head slot", "Select Helmet"))
-top_list.append(rs.ItemChest("Body slot", "Select Chest"))
-bottom_list.append(rs.ItemLegs("Legs slot", "Select Legs"))
-pocket_list.append(rs.ItemPocket("Ammo slot", "Select Pocket/Ammo"))
-glove_list.append(rs.ItemGloves("Hands slot", "Select Gloves"))
-boot_list.append(rs.ItemBoots("Feet slot", "Select Boots"))
-ring_list.append(rs.ItemRing("Ring slot", "Select Ring"))
-neck_list.append(rs.ItemNecklace("Neck slot", "Select Necklace"))
-cape_list.append(rs.ItemCape("Cape slot", "Select Cape"))
-weapon_list.append(rs.ItemWeapon("Weapon slot", "Select Weapon"))
-offhand_list.append(rs.ItemOffHand("Shield slot", "Select Offhand"))
-
 
 def build_item_lists():
     """Pulls dictionaries from the items_stored.jsonl file. Line by line initializes items by equipment slot,
     and adds them to the correct equipment slot list."""
+
+    # Empty items for placeholders
+    helmet_list.clear()
+    helmet_list.append(rs.ItemHelmet("Head slot", "Select Helmet"))
+    top_list.clear()
+    top_list.append(rs.ItemChest("Body slot", "Select Chest"))
+    bottom_list.clear()
+    bottom_list.append(rs.ItemLegs("Legs slot", "Select Legs"))
+    pocket_list.clear()
+    pocket_list.append(rs.ItemPocket("Ammo slot", "Select Pocket/Ammo"))
+    glove_list.clear()
+    glove_list.append(rs.ItemGloves("Hands slot", "Select Gloves"))
+    boot_list.clear()
+    boot_list.append(rs.ItemBoots("Feet slot", "Select Boots"))
+    ring_list.clear()
+    ring_list.append(rs.ItemRing("Ring slot", "Select Ring"))
+    neck_list.clear()
+    neck_list.append(rs.ItemNecklace("Neck slot", "Select Necklace"))
+    cape_list.clear()
+    cape_list.append(rs.ItemCape("Cape slot", "Select Cape"))
+    weapon_list.clear()
+    weapon_list.append(rs.ItemWeapon("Weapon slot", "Select Weapon"))
+    offhand_list.clear()
+    offhand_list.append(rs.ItemOffHand("Shield slot", "Select Offhand"))
 
     with open("items_stored.jsonl", "r") as openfile:
         for line in openfile:
