@@ -58,6 +58,26 @@ def get_wiki_stats(i):
         item_dictionary["equipment slot"] = "2h slot"
     if item_dictionary["equipment slot"] == "Weapon slot table":
         item_dictionary["equipment slot"] = "Weapon slot"
+    if item_dictionary["equipment slot"] == "Ring slot table":
+        item_dictionary["equipment slot"] = "Ring slot"
+    if item_dictionary["equipment slot"] == "Body slot table":
+        item_dictionary["equipment slot"] = "Body slot"
+    if item_dictionary["equipment slot"] == "Legs slot table":
+        item_dictionary["equipment slot"] = "Legs slot"
+    if item_dictionary["equipment slot"] == "Head slot table":
+        item_dictionary["equipment slot"] = "Head slot"
+    if item_dictionary["equipment slot"] == "Cape slot table":
+        item_dictionary["equipment slot"] = "Cape slot"
+    if item_dictionary["equipment slot"] == "Neck slot table":
+        item_dictionary["equipment slot"] = "Neck slot"
+    if item_dictionary["equipment slot"] == "Ammo slot table":
+        item_dictionary["equipment slot"] = "Ammo slot"
+    if item_dictionary["equipment slot"] == "Shield slot table":
+        item_dictionary["equipment slot"] = "Shield slot"
+    if item_dictionary["equipment slot"] == "Hands slot table":
+        item_dictionary["equipment slot"] = "Hands slot"
+    if item_dictionary["equipment slot"] == "Feet slot table":
+        item_dictionary["equipment slot"] = "Feet slot"
 
 # check through the stored_items.json file to see if an item has already been added or not. if not it is added
     with open("stored_items.json", "r") as checkfile:
@@ -80,7 +100,7 @@ def get_wiki_stats(i):
 
 
 # change the string to import a new item
-get_wiki_stats("bulwark")
+get_wiki_stats("magus ring")
 
 
 

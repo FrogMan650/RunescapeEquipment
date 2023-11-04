@@ -1,4 +1,5 @@
 import runescape_items as rsi
+import import_from_wiki as ifw
 from tkinter import *
 
 rsi.build_item_lists()
@@ -196,10 +197,6 @@ def callback(a):
                 if z.equipment_slot == "Shield slot":
                     for w in equipped_items:
                         if w.equipment_slot == "2h slot":
-                            selected_weapon_option.set(rsi.weapon_list[0].name)
-                            special_attack[0] = rsi.weapon_list[0].special_attack
-                            equipped_items.remove(w)
-                        if w.equipment_slot == "2h slot table":
                             selected_weapon_option.set(rsi.weapon_list[0].name)
                             special_attack[0] = rsi.weapon_list[0].special_attack
                             equipped_items.remove(w)
